@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Navigation } from '@/components/Navigation'
-import { JourneyTab } from '@/components/JourneyTab'
-import { WorkTab } from '@/components/WorkTab'
-import { ConnectTab } from '@/components/ConnectTab'
-import { AnimatedBackground } from '@/components/AnimatedBackground'
+import { Navigation } from '@/app/components/Navigation'
+import { JourneyTab } from '@/app/components/JourneyTab'
+import { WorkTab } from '@/app/components/WorkTab'
+import { ConnectTab } from '@/app/components/ConnectTab'
+import { AnimatedBackground } from '@/app/components/AnimatedBackground'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('journey')

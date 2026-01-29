@@ -43,7 +43,7 @@ export function ProjectsGrid() {
               {project.tech.map(tech => (
                 <span
                   key={tech}
-                  className="bg-purple-500/10 text-purple-500 px-3 py-1 rounded-md text-sm font-medium"
+                  className="bg-purple-500/10 text-purple-500 px-3 py-1.5 rounded-md text-sm font-medium"
                 >
                   {tech}
                 </span>

@@ -48,8 +48,8 @@ export function SkillsCloud({ onSkillClick }: { onSkillClick: (skill: string) =>
           )}
           onClick={() => onSkillClick(skill.name)}
           animate={{
-            x: Math.sin((Date.now() + index * 500) / 5000) * 20,
-            y: Math.cos((Date.now() + index * 500) / 5000) * 15
+            x: Math.sin((Date.now() / 5000 + index) * 20) * 20,
+            y: Math.cos((Date.now() / 5000 + index) * 20) * 15
           }}
           transition={{ duration: 15 + Math.random() * 15, repeat: Infinity, repeatType: 'reverse' }}
         >
