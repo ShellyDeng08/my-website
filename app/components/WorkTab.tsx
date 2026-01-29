@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Card } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { SkillsCloud } from './SkillsCloud'
 import { ExperiencePanel } from './ExperiencePanel'
 import { ProjectsGrid } from './ProjectsGrid'
