@@ -114,6 +114,38 @@ html {
   overflow: hidden;
 }
 
+/* Animated background orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-purple);
+  top: -100px;
+  left: -100px;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--accent-pink);
+  bottom: -200px;
+  right: -150px;
+}
+
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: var(--accent-cyan);
+  top: 50%;
+  left: 60%;
+}
+
 /* Particle burst */
 .particle {
   position: fixed;
@@ -147,5 +179,21 @@ html {
   .flex.gap-4.mt-8.justify-center {
     flex-direction: column;
     align-items: center;
+  }
+
+  /* Scale down orbs on mobile */
+  .orb-1 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orb-2 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .orb-3 {
+    width: 200px;
+    height: 200px;
   }
 }
