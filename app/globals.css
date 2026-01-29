@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f0f1a;
+  --foreground: #ffffff;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+  --accent-cyan: #06b6d4;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), var(--font-space-grotesk), sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-purple);
+  border-radius: 4px;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Perspective for 3D effects */
+.perspective-container {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
+
+/* Timeline styles */
+.timeline-item {
+  position: relative;
+  padding-left: 40px;
+  padding-bottom: 40px;
+  border-left: 2px solid var(--glass-border);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  border: 3px solid var(--background);
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover::before {
+  transform: scale(1.5);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+/* Skills cloud */
+.skills-cloud {
+  position: relative;
+  height: 400px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Particle burst */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  animation: particleBurst 0.6s ease-out forwards;
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline-header {
+    flex-direction: column;
+  }
+
+  .skills-cloud {
+    height: 300px;
+  }
+}
