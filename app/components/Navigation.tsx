@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 
-export function Navigation() {
+export function Navigation({ activeTab, onTabChange }: { activeTab: string; onTabChange: (tab: string) => void }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const tabs = [
@@ -19,9 +19,10 @@ export function Navigation() {
         {tabs.map(tab => (
           <Button
             key={tab.id}
-            variant={tab.id === 'journey' ? 'default' : 'ghost'}
+            variant={activeTab === tab.id ? 'default' : 'ghost'}
             size="sm"
             className="text-slate-600"
+            onClick={() => onTabChange(tab.id)}
           >
             {tab.label}
           </Button>
@@ -45,10 +46,13 @@ export function Navigation() {
             {tabs.map(tab => (
               <Button
                 key={tab.id}
-                variant={tab.id === 'journey' ? 'default' : 'ghost'}
+                variant={activeTab === tab.id ? 'default' : 'ghost'}
                 size="sm"
                 className="text-slate-600"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  onTabChange(tab.id)
+                  setIsMobileMenuOpen(false)
+                }}
               >
                 {tab.label}
               </Button>

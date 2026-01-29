@@ -66,6 +66,17 @@ html {
   padding-left: 40px;
   padding-bottom: 40px;
   border-left: 2px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.timeline-item.dimmed {
+  opacity: 0.3;
+  transform: scale(0.98);
+}
+
+.timeline-item.highlighted {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .timeline-item::before {
@@ -79,6 +90,11 @@ html {
   background: var(--accent-purple);
   border: 3px solid var(--background);
   transition: all 0.3s ease;
+}
+
+.timeline-item.highlighted::before {
+  transform: scale(1.5);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
 }
 
 .timeline-item:hover::before {
@@ -125,5 +141,11 @@ html {
 
   .skills-cloud {
     height: 300px;
+  }
+
+  /* Stack magnetic buttons on mobile */
+  .flex.gap-4.mt-8.justify-center {
+    flex-direction: column;
+    align-items: center;
   }
 }
