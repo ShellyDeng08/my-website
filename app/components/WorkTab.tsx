@@ -1,29 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { SkillsCloud } from './SkillsCloud'
 import { ExperiencePanel } from './ExperiencePanel'
 import { ProjectsGrid } from './ProjectsGrid'
-
-const experienceData = {
-  'React': [
-    { company: 'TikTok', role: 'Frontend Dev', period: 'Mar 2025 – Present' },
-    { company: 'ByteDance', role: 'Frontend Engineer', period: '2023 – 2025' }
-  ],
-  'Vue.js': [
-    { company: 'ByteDance', role: 'Frontend Engineer', period: '2023 – 2025' }
-  ],
-  'TypeScript': [
-    { company: 'TikTok', role: 'Frontend Dev', period: 'Mar 2025 – Present' }
-  ],
-  'Node.js': [
-    { company: 'ByteDance', role: 'Backend Support', period: '2023 – 2025' }
-  ],
-  'Performance': [
-    { company: 'TikTok', role: 'Optimization Lead', period: 'Mar 2025 – Present' }
-  ]
-}
 
 export function WorkTab() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
