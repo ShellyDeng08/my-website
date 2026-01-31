@@ -1,43 +1,49 @@
 'use client'
 
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
+import { motion } from 'framer-motion'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const experiences = [
   {
-    role: 'Frontend Development Engineer',
-    company: 'TikTok User Growth Team',
-    period: 'Mar 2025 – Present',
+    role: 'Full-Stack Engineer',
+    company: 'Blitz',
+    period: 'Apr 2024 – Present',
     achievements: [
-      'Increased user engagement by <strong>25%</strong> with interactive features',
-      'Improved page load time by <strong>40%</strong> through performance optimization',
-      'Led cross-team collaboration for A/B testing framework'
+      'Maintained and optimized custom server-side rendering (SSR) architecture using Node.js + React',
+      'Reduced app crash rates by diagnosing and resolving critical memory usage issues',
+      'Achieved <strong>20%</strong> decrease in uninstall rates and enhanced user experience'
     ],
-    skills: ['React', 'TypeScript', 'Performance']
+    skills: ['React', 'Node.js', 'SSR']
   },
   {
-    role: 'Frontend Engineer',
-    company: 'ByteDance',
-    period: '2023 – 2025',
+    role: 'Software Engineer',
+    company: 'TikTok',
+    period: 'Jun 2021 – Sep 2023',
     achievements: [
-      'Built enterprise-level web applications serving <strong>10M+ users</strong>',
-      'Developed reusable component library reducing dev time by <strong>30%</strong>',
-      'Implemented state management patterns for complex data flows'
+      'Designed and developed a permission management system (API design, backend processing, database schema)',
+      'System adopted by <strong>10+ business units</strong> to enhance security and efficiency',
+      'Led system design for quality monitoring, reducing online incidents by <strong>30%</strong>',
+      'Managed team-wide code reviews, deployment processes, and system monitoring'
     ],
-    skills: ['Vue.js', 'Element Plus', 'Vite']
+    skills: ['Python', 'Golang', 'MySQL']
   },
   {
-    role: 'Frontend Engineer Intern',
-    company: '360 Digital Technology',
-    period: '2022',
+    role: 'Full-Stack Engineer',
+    company: 'Trip.com Group',
+    period: 'Jan 2018 – Apr 2021',
     achievements: [
-      'Contributed to 3 production features in first 3 months',
-      'Implemented responsive designs improving mobile UX'
+      'Led migration of hotel site\'s tech stack from C# to Node.js + React',
+      'Achieved <strong>30%</strong> boost in page speed',
+      'Contributed to architecture design of new tech repository (SSR, BFF layer, component library)',
+      'Achieved <strong>~50%</strong> performance improvement on hotel details page'
     ],
-    skills: ['JavaScript', 'Git']
+    skills: ['Node.js', 'React', 'SSR']
   }
 ]
 
 export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: string | null }) {
+  const prefersReducedMotion = useReducedMotion()
   return (
     <div className="timeline mt-20 pl-5">
       {experiences.map((exp, index) => {
@@ -45,8 +51,11 @@ export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: str
         const isDimmed = highlightedSkill && !isHighlighted
 
         return (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: isDimmed ? 0.3 : 1, x: 0 }}
+            transition={{ duration: prefersReducedMotion ? 0.1 : 0.3, delay: prefersReducedMotion ? 0 : index * 0.1 }}
             className={`timeline-item ${isHighlighted ? 'highlighted' : ''} ${isDimmed ? 'dimmed' : ''}`}
             data-skills={exp.skills.join(',')}
           >
@@ -75,14 +84,22 @@ export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: str
                       // Navigate to work tab and highlight skill
                       window.dispatchEvent(new CustomEvent('skillClick', { detail: skill }))
                     }}
-                    className="bg-purple-500/10 border border-purple-500/30 text-purple-500 px-3 py-1.5 rounded-lg text-sm font-medium cursor-pointer hover:bg-purple-500 hover:text-white transition-all"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        window.dispatchEvent(new CustomEvent('skillClick', { detail: skill }))
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    className="bg-purple-500/10 border border-purple-500/30 text-purple-500 px-4 py-2 rounded-lg text-sm font-medium cursor-pointer hover:bg-purple-500 hover:text-white transition-all focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:outline-none"
                   >
                     {skill}
                   </span>
                 ))}
               </div>
             </Card>
-          </div>
+          </motion.div>
         )
       })}
     </div>

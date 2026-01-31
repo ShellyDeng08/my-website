@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 
 export function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
+    if (prefersReducedMotion) return
+
     const handleMouseMove = (e: MouseEvent) => {
       const x = (window.innerWidth / 2 - e.clientX) / 40
       const y = (window.innerHeight / 2 - e.clientY) / 40
@@ -14,23 +18,17 @@ export function Hero() {
     }
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
-
-  const taglines = [
-    'Fullstack Engineer @ TikTok',
-    'React/Next.js Specialist',
-    'Frontend & Backend',
-    'Building for millions'
-  ]
+  }, [prefersReducedMotion])
 
   return (
     <section className="min-h-[80vh] flex flex-col justify-center items-center text-center relative">
       <motion.div
-        animate={{ x: mousePos.x, y: mousePos.y }}
-        className="absolute w-[180px] h-[180px] rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 p-1"
+        animate={prefersReducedMotion ? { x: 0, y: 0 } : { x: mousePos.x, y: mousePos.y }}
+        className="absolute w-[200px] h-[200px] rounded-full bg-gradient-to-br from-purple-500/30 via-pink-500/30 to-cyan-500/30 p-1"
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+        style={{ zIndex: -1 }}
       >
-        <div className="absolute inset-1 bg-background rounded-full flex items-center justify-center font-bold text-4xl bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
+        <div className="absolute inset-1 bg-background/60 rounded-full flex items-center justify-center font-bold text-4xl bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
           SD
         </div>
       </motion.div>
@@ -46,23 +44,15 @@ export function Hero() {
       </div>
 
       <div className="flex gap-5 mt-10 flex-wrap justify-center">
-        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:-translate-y-1 transition-all duration-300">
+        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:bg-white/5 transition-all duration-200">
           <span className="text-3xl font-bold bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
-            5+
+            8+
           </span>
           <div className="text-sm text-slate-400 font-medium uppercase tracking-wider mt-1">
             Years Experience
           </div>
         </div>
-        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:-translate-y-1 transition-all duration-300">
-          <span className="text-3xl font-bold bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
-            10+
-          </span>
-          <div className="text-sm text-slate-400 font-medium uppercase tracking-wider mt-1">
-            Projects
-          </div>
-        </div>
-        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:-translate-y-1 transition-all duration-300">
+        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:bg-white/5 transition-all duration-200">
           <span className="text-3xl font-bold bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
             3
           </span>
@@ -81,10 +71,10 @@ function TypingTaglines() {
   const [isDeleting, setIsDeleting] = useState(false)
 
   const taglines = [
-    'Fullstack Engineer @ TikTok',
-    'React/Next.js Specialist',
-    'Frontend & Backend',
-    'Building for millions'
+    'Software Engineer with 8+ years experience',
+    'Full-Stack Engineer @ Blitz',
+    'Previously @ TikTok & Trip.com Group',
+    'Building scalable systems'
   ]
 
   useEffect(() => {

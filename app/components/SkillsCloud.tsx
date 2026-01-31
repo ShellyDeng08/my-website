@@ -2,60 +2,101 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const skills = [
-  { name: 'React', category: 'frontend', size: 'large' },
-  { name: 'Vue.js', category: 'frontend', size: 'large' },
-  { name: 'Next.js', category: 'frontend', size: 'large' },
-  { name: 'TypeScript', category: 'frontend', size: 'medium' },
-  { name: 'JavaScript', category: 'frontend', size: 'medium' },
-  { name: 'Tailwind CSS', category: 'frontend', size: 'medium' },
-  { name: 'Node.js', category: 'backend', size: 'large' },
-  { name: 'Express', category: 'backend', size: 'medium' },
-  { name: 'Python', category: 'backend', size: 'medium' },
-  { name: 'PostgreSQL', category: 'backend', size: 'small' },
-  { name: 'MySQL', category: 'backend', size: 'small' },
-  { name: 'Git', category: 'tools', size: 'medium' },
-  { name: 'Vite', category: 'tools', size: 'medium' },
-  { name: 'Webpack', category: 'tools', size: 'small' },
-  { name: 'Docker', category: 'tools', size: 'small' },
-  { name: 'Jest', category: 'tools', size: 'small' },
-  { name: 'shadcn/ui', category: 'frontend', size: 'small' },
-  { name: 'Element Plus', category: 'frontend', size: 'small' }
+  // Frontend
+  { name: 'React', category: 'frontend', icon: '⚛️' },
+  { name: 'React Native', category: 'frontend', icon: '📱' },
+  { name: 'JavaScript', category: 'frontend', icon: '⚡' },
+  { name: 'HTML/CSS', category: 'frontend', icon: '🎨' },
+  // Backend
+  { name: 'Node.js', category: 'backend', icon: '💚' },
+  { name: 'Python', category: 'backend', icon: '🐍' },
+  { name: 'Golang', category: 'backend', icon: '🐹' },
+  // Databases
+  { name: 'MySQL', category: 'database', icon: '🗄️' },
+  { name: 'MongoDB', category: 'database', icon: '🍃' },
+  // API
+  { name: 'GraphQL', category: 'api', icon: '◈' },
+  { name: 'RESTful API', category: 'api', icon: '🌐' },
+  // Tools
+  { name: 'Jest', category: 'tools', icon: '🧪' },
+  { name: 'Webpack', category: 'tools', icon: '📦' },
+  { name: 'Github CI', category: 'tools', icon: '🔄' }
 ]
 
-export function SkillsCloud({ onSkillClick }: { onSkillClick: (skill: string) => void }) {
+const categoryConfig = {
+  frontend: { label: 'Frontend', color: 'from-purple-500 to-pink-500', borderColor: 'border-purple-500/30' },
+  backend: { label: 'Backend', color: 'from-pink-500 to-rose-500', borderColor: 'border-pink-500/30' },
+  database: { label: 'Databases', color: 'from-amber-500 to-orange-500', borderColor: 'border-amber-500/30' },
+  api: { label: 'API', color: 'from-green-500 to-emerald-500', borderColor: 'border-green-500/30' },
+  tools: { label: 'Tools', color: 'from-cyan-500 to-blue-500', borderColor: 'border-cyan-500/30' }
+}
+
+const categories = Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>
+
+export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (skill: string) => void; selectedSkill: string | null }) {
+  const prefersReducedMotion = useReducedMotion()
+
+  const handleClick = (skill: string) => {
+    console.log('SkillsCloud handleClick:', skill)
+    onSkillClick(skill)
+  }
+
+  const handleKeyDown = (skill: string, e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      console.log('SkillsCloud handleKeyDown:', skill)
+      e.preventDefault()
+      e.stopPropagation()
+      onSkillClick(skill)
+    }
+  }
+
   return (
-    <div className="skills-cloud">
-      {skills.map((skill, index) => (
-        <motion.div
-          key={skill.name}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: skill.size === 'large' ? 1.2 : skill.size === 'medium' ? 1 : 0.85 }}
-          transition={{
-            duration: 0.5 + Math.random(),
-            delay: index * 0.05
-          }}
-          className={cn(
-            'absolute',
-            'glass',
-            'px-4 py-2 rounded-3xl',
-            'text-sm font-medium cursor-pointer hover:scale-110',
-            'border-slate-200/8',
-            skill.category === 'frontend' && 'border-purple-500/30',
-            skill.category === 'backend' && 'border-pink-500/30',
-            skill.category === 'tools' && 'border-cyan-500/30'
-          )}
-          onClick={() => onSkillClick(skill.name)}
-          animate={{
-            x: Math.sin((Date.now() / 5000 + index) * 20) * 20,
-            y: Math.cos((Date.now() / 5000 + index) * 20) * 15
-          }}
-          transition={{ duration: 15 + Math.random() * 15, repeat: Infinity, repeatType: 'reverse' }}
-        >
-          {skill.name}
-        </motion.div>
-      ))}
+    <div className="w-full max-w-5xl mx-auto py-8">
+      {categories.map((category) => {
+        const config = categoryConfig[category]
+        const categorySkills = skills.filter(s => s.category === category)
+
+        return (
+          <motion.div
+            key={category}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: categories.indexOf(category) * 0.1 }}
+            className="mb-6"
+          >
+            <h3 className="text-lg font-semibold mb-4 text-slate-300">{config.label}</h3>
+            <div className="flex flex-wrap gap-3">
+              {categorySkills.map((skill, index) => {
+                const isSelected = selectedSkill === skill.name
+                return (
+                  <motion.button
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ scale: 1.08, y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    onClick={() => handleClick(skill.name)}
+                    onKeyDown={(e) => handleKeyDown(skill.name, e)}
+                    className={cn(
+                      'glass px-4 py-2.5 rounded-xl text-sm font-medium transition-all relative',
+                      'border border-white/10',
+                      'focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2',
+                      isSelected ? `${config.borderColor} shadow-lg shadow-${category.replace('frontend', 'purple').replace('backend', 'pink').replace('database', 'amber').replace('api', 'green').replace('tools', 'cyan')}-500/20 bg-gradient-to-r ${categoryConfig[category].color} bg-clip-text text-transparent` : 'border-slate-200/10 text-slate-300 hover:border-white/30 hover:bg-white/5'
+                    )}
+                  >
+                    <span className="mr-2">{skill.icon}</span>
+                    {skill.name}
+                  </motion.button>
+                )
+              })}
+            </div>
+          </motion.div>
+        )
+      })}
     </div>
   )
 }

@@ -27,12 +27,6 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-    compoundVariants: [
-      {
-        focusVisible: ["ring"],
-        focusVisibleClassName: "focus-visible:ring-2 focus-visible:ring-ring-slate-950 focus-visible:ring-offset-2",
-      },
-    ],
   }
 )
 
