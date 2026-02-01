@@ -54,7 +54,7 @@ export default function Home() {
               className="w-full h-full absolute"
               style={{ transformStyle: 'preserve-3d' } as React.CSSProperties}
             >
-              <WorkTab highlightedSkill={highlightedSkill} onSkillHighlight={setHighlightedSkill} />
+              <WorkTab onSkillHighlight={setHighlightedSkill} />
             </motion.div>
           )}
           {activeTab === 'connect' && (

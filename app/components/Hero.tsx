@@ -2,7 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+
+const keywords = [
+  'React', 'Node.js', 'TypeScript', 'Python',
+  'Full-Stack', 'SSR', 'Golang', 'MySQL',
+  'System Design', 'Leadership', 'CI/CD', 'Cloud'
+]
 
 export function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
@@ -12,8 +19,8 @@ export function Hero() {
     if (prefersReducedMotion) return
 
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (window.innerWidth / 2 - e.clientX) / 40
-      const y = (window.innerHeight / 2 - e.clientY) / 40
+      const x = (window.innerWidth / 2 - e.clientX) / 60
+      const y = (window.innerHeight / 2 - e.clientY) / 60
       setMousePos({ x, y })
     }
     window.addEventListener('mousemove', handleMouseMove)
@@ -21,16 +28,61 @@ export function Hero() {
   }, [prefersReducedMotion])
 
   return (
-    <section className="min-h-[80vh] flex flex-col justify-center items-center text-center relative">
+    <section className="min-h-[85vh] flex flex-col justify-center items-center text-center relative overflow-hidden">
+      {/* Circular keywords around avatar */}
+      {!prefersReducedMotion && (
+        <div
+          className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{ zIndex: 1, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+        >
+          {keywords.map((keyword, index) => {
+            const angle = (index / keywords.length) * 2 * Math.PI - Math.PI / 2
+            const radius = 220
+            const x = Math.cos(angle) * radius + 250
+            const y = Math.sin(angle) * radius + 250
+            return (
+              <motion.div
+                key={keyword}
+                className="absolute text-sm font-medium text-cyan-400/70 whitespace-nowrap"
+                style={{ left: x, top: y, transform: 'translate(-50%, -50%)' }}
+                animate={{
+                  rotate: 360,
+                }}
+                transition={{ duration: 60, repeat: Infinity, ease: 'linear', delay: -index * 0.1 }}
+              >
+                {keyword}
+              </motion.div>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Avatar in center */}
       <motion.div
         animate={prefersReducedMotion ? { x: 0, y: 0 } : { x: mousePos.x, y: mousePos.y }}
-        className="absolute w-[200px] h-[200px] rounded-full bg-gradient-to-br from-purple-500/30 via-pink-500/30 to-cyan-500/30 p-1"
+        className="relative w-[220px] h-[220px] rounded-full overflow-hidden mb-8"
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-        style={{ zIndex: -1 }}
+        style={{ zIndex: 2 }}
       >
-        <div className="absolute inset-1 bg-background/60 rounded-full flex items-center justify-center font-bold text-4xl bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
-          SD
-        </div>
+        <motion.div
+          animate={{
+            boxShadow: [
+              '0 0 20px rgba(139, 92, 246, 0.3)',
+              '0 0 40px rgba(236, 72, 153, 0.4)',
+              '0 0 20px rgba(6, 182, 212, 0.3)',
+            ],
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-full h-full rounded-full p-1 bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500"
+        >
+          <Image
+            src="/avatar.jpg"
+            alt="Shelly Deng"
+            width={220}
+            height={220}
+            className="w-full h-full rounded-full object-cover"
+          />
+        </motion.div>
       </motion.div>
 
       <h1 className="text-[clamp(3rem,8vw,5rem)] font-bold leading-none mb-4">
@@ -65,17 +117,17 @@ export function Hero() {
   )
 }
 
+const taglines = [
+  'Software Engineer with 8+ years experience',
+  'Full-Stack Engineer @ Blitz',
+  'Previously @ TikTok & Trip.com Group',
+  'Building scalable systems'
+]
+
 function TypingTaglines() {
   const [displayedText, setDisplayedText] = useState('')
   const [taglineIndex, setTaglineIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
-
-  const taglines = [
-    'Software Engineer with 8+ years experience',
-    'Full-Stack Engineer @ Blitz',
-    'Previously @ TikTok & Trip.com Group',
-    'Building scalable systems'
-  ]
 
   useEffect(() => {
     const currentTagline = taglines[taglineIndex]

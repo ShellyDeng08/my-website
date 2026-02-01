@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const skills = [
   // Frontend
@@ -37,8 +36,6 @@ const categoryConfig = {
 const categories = Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>
 
 export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (skill: string) => void; selectedSkill: string | null }) {
-  const prefersReducedMotion = useReducedMotion()
-
   const handleClick = (skill: string) => {
     console.log('SkillsCloud handleClick:', skill)
     onSkillClick(skill)
@@ -69,7 +66,7 @@ export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (sk
           >
             <h3 className="text-lg font-semibold mb-4 text-slate-300">{config.label}</h3>
             <div className="flex flex-wrap gap-3">
-              {categorySkills.map((skill, index) => {
+              {categorySkills.map((skill) => {
                 const isSelected = selectedSkill === skill.name
                 return (
                   <motion.button

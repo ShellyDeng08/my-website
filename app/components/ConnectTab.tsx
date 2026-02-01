@@ -7,7 +7,7 @@ export function ConnectTab() {
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 pt-24 pb-16 text-center">
-      <h2 className="text-3xl font-bold mb-4">Let's Connect</h2>
+      <h2 className="text-3xl font-bold mb-4">Let&apos;s Connect</h2>
 
       {/* Availability Card */}
       <div className="glass rounded-2xl border border-slate-200/8 p-12 max-w-md mx-auto cursor-pointer hover:-translate-y-1 transition-all duration-300">

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ParticleBurstProps {
   x: number
@@ -11,10 +11,14 @@ interface ParticleBurstProps {
 }
 
 export function ParticleBurst({ x, y, color, onComplete }: ParticleBurstProps) {
-  const particles = Array.from({ length: 12 }, (_, i) => ({
-    angle: (i / 12) * Math.PI * 2,
-    distance: 50 + Math.random() * 50,
-  }))
+  // Use lazy initializer with deterministic pseudo-random based on index
+  const [particles] = useState(() =>
+    Array.from({ length: 12 }, (_, i) => ({
+      angle: (i / 12) * Math.PI * 2,
+      // Simple hash function for deterministic pseudo-random
+      distance: 50 + ((i * 9301 + 49297) % 233280) / 233280 * 50,
+    }))
+  )
 
   useEffect(() => {
     const timer = setTimeout(onComplete, 600)
