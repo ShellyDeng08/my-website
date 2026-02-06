@@ -45,7 +45,9 @@ const experiences = [
 export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: string | null }) {
   const prefersReducedMotion = useReducedMotion()
   return (
-    <div className="timeline mt-20 pl-5">
+    <section className="h-screen flex flex-col justify-center py-16 px-8 bg-[#0f0f1a] overflow-y-auto">
+      <h2 className="text-4xl font-bold text-center mb-12 text-white">Work Experience</h2>
+      <div className="timeline max-w-4xl mx-auto w-full">
       {experiences.map((exp, index) => {
         const isHighlighted = highlightedSkill ? exp.skills.includes(highlightedSkill) : true
         const isDimmed = highlightedSkill && !isHighlighted
@@ -69,9 +71,9 @@ export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: str
                   {exp.period}
                 </span>
               </CardHeader>
-              <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2 mt-4">
+              <ul className="text-slate-400 leading-relaxed list-disc list-inside space-y-2 mt-4">
                 {exp.achievements.map((achievement, i) => (
-                  <li key={i} className="text-slate-300">
+                  <li key={i} className="text-slate-400">
                     <span dangerouslySetInnerHTML={{ __html: achievement }} />
                   </li>
                 ))}
@@ -102,6 +104,7 @@ export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: str
           </motion.div>
         )
       })}
-    </div>
+      </div>
+    </section>
   )
 }

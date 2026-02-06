@@ -24,6 +24,13 @@ body {
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+/* Smooth scroll snap sections */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Custom scrollbar */
@@ -65,7 +72,7 @@ html {
   position: relative;
   padding-left: 40px;
   padding-bottom: 40px;
-  border-left: 2px solid var(--glass-border);
+  border-left: 2px solid rgba(139, 92, 246, 0.3);
   transition: all 0.3s ease;
 }
 
@@ -87,8 +94,8 @@ html {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--accent-purple);
-  border: 3px solid var(--background);
+  background: #8b5cf6;
+  border: 3px solid #0f0f1a;
   transition: all 0.3s ease;
 }
 

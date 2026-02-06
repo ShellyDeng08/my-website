@@ -1,27 +1,33 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
-export function Navigation({ activeTab, onTabChange }: { activeTab: string; onTabChange: (tab: string) => void }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+export function Navigation({
+  activeTab,
+  onTabChange,
+}: {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+}) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const tabs = [
-    { id: 'journey', label: 'My Journey' },
-    { id: 'work', label: 'My Work' },
-    { id: 'connect', label: 'Connect' }
-  ]
+    { id: "journey", label: "My Journey" },
+    { id: "work", label: "My Work" },
+    { id: "connect", label: "Connect" },
+  ];
 
   return (
     <>
       {/* Desktop nav */}
-      <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-2 px-5 py-3 glass rounded-16 border border-white/20 bg-white/10">
-        {tabs.map(tab => (
+      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-3 px-8 py-4 rounded-20 border border-white/30 bg-white/15 shadow-lg shadow-purple-500/20">
+        {tabs.map((tab) => (
           <Button
             key={tab.id}
-            variant={activeTab === tab.id ? 'default' : 'ghost'}
-            size="sm"
-            className="text-white/90 hover:text-white font-medium"
+            variant={activeTab === tab.id ? "default" : "ghost"}
+            size="lg"
+            className="text-white/90 hover:text-white font-semibold text-base px-6"
             onClick={() => onTabChange(tab.id)}
           >
             {tab.label}
@@ -35,24 +41,37 @@ export function Navigation({ activeTab, onTabChange }: { activeTab: string; onTa
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
       >
-        <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        <svg
+          className="w-6 h-6 text-white"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
       </button>
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}>
+        <div
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
           <div className="fixed top-20 left-1/2 -translate-x-1/2 glass rounded-16 border border-white/20 bg-white/10 p-2 flex flex-col gap-2 w-max">
-            {tabs.map(tab => (
+            {tabs.map((tab) => (
               <Button
                 key={tab.id}
-                variant={activeTab === tab.id ? 'default' : 'ghost'}
+                variant={activeTab === tab.id ? "default" : "ghost"}
                 size="sm"
                 className="text-white/90 hover:text-white font-medium"
                 onClick={() => {
-                  onTabChange(tab.id)
-                  setIsMobileMenuOpen(false)
+                  onTabChange(tab.id);
+                  setIsMobileMenuOpen(false);
                 }}
               >
                 {tab.label}
@@ -62,5 +81,5 @@ export function Navigation({ activeTab, onTabChange }: { activeTab: string; onTa
         </div>
       )}
     </>
-  )
+  );
 }

@@ -6,14 +6,14 @@ import Image from 'next/image'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const keywords = [
-  'React', 'Node.js', 'TypeScript', 'Python',
-  'Full-Stack', 'SSR', 'Golang', 'MySQL',
-  'System Design', 'Leadership', 'CI/CD', 'Cloud'
+  'Full-Stack Engineer', '8+ Years Exp', 'Shanghai',
+  'Coffee Lover', 'Building for Scale', 'TikTok Alumni'
 ]
 
 export function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const prefersReducedMotion = useReducedMotion()
+  const [rotation, setRotation] = useState(0)
 
   useEffect(() => {
     if (prefersReducedMotion) return
@@ -27,63 +27,75 @@ export function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [prefersReducedMotion])
 
-  return (
-    <section className="min-h-[85vh] flex flex-col justify-center items-center text-center relative overflow-hidden">
-      {/* Circular keywords around avatar */}
-      {!prefersReducedMotion && (
-        <div
-          className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{ zIndex: 1, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
-        >
-          {keywords.map((keyword, index) => {
-            const angle = (index / keywords.length) * 2 * Math.PI - Math.PI / 2
-            const radius = 220
-            const x = Math.cos(angle) * radius + 250
-            const y = Math.sin(angle) * radius + 250
-            return (
-              <motion.div
-                key={keyword}
-                className="absolute text-sm font-medium text-cyan-400/70 whitespace-nowrap"
-                style={{ left: x, top: y, transform: 'translate(-50%, -50%)' }}
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{ duration: 60, repeat: Infinity, ease: 'linear', delay: -index * 0.1 }}
-              >
-                {keyword}
-              </motion.div>
-            )
-          })}
-        </div>
-      )}
+  useEffect(() => {
+    if (prefersReducedMotion) return
+    const interval = setInterval(() => {
+      setRotation(prev => prev + 0.2)
+    }, 16)
+    return () => clearInterval(interval)
+  }, [prefersReducedMotion])
 
-      {/* Avatar in center */}
-      <motion.div
-        animate={prefersReducedMotion ? { x: 0, y: 0 } : { x: mousePos.x, y: mousePos.y }}
-        className="relative w-[220px] h-[220px] rounded-full overflow-hidden mb-8"
-        transition={{ type: 'spring', stiffness: 100, damping: 20 }}
-        style={{ zIndex: 2 }}
-      >
+  return (
+    <section className="h-screen flex flex-col justify-center items-center text-center relative overflow-hidden bg-[#0f0f1a]">
+      {/* Avatar with circular keywords */}
+      <div className="relative flex justify-center items-center mb-8">
+        {/* Circular keywords around avatar */}
+        {!prefersReducedMotion && (
+          <motion.div
+            className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{
+              rotate: `${rotation}deg`,
+            }}
+          >
+            {keywords.map((keyword, index) => {
+              const angle = (index / keywords.length) * 2 * Math.PI - Math.PI / 2
+              const radius = 220
+              const x = Math.cos(angle) * radius + 250
+              const y = Math.sin(angle) * radius + 250
+              return (
+                <div
+                  key={keyword}
+                  className="absolute text-sm font-medium text-cyan-400/70 whitespace-nowrap"
+                  style={{
+                    left: x,
+                    top: y,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  {keyword}
+                </div>
+              )
+            })}
+          </motion.div>
+        )}
+
+        {/* Avatar in center */}
         <motion.div
-          animate={{
-            boxShadow: [
-              '0 0 20px rgba(139, 92, 246, 0.3)',
-              '0 0 40px rgba(236, 72, 153, 0.4)',
-              '0 0 20px rgba(6, 182, 212, 0.3)',
-            ],
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-full h-full rounded-full p-1 bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500"
+          animate={prefersReducedMotion ? { x: 0, y: 0 } : { x: mousePos.x, y: mousePos.y }}
+          className="relative z-10 w-[220px] h-[220px] rounded-full overflow-hidden"
+          transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         >
-          <Image
-            src="/avatar.jpg"
-            alt="Shelly Deng"
-            width={220}
-            height={220}
-            className="w-full h-full rounded-full object-cover"
-          />
+          <motion.div
+            animate={{
+              boxShadow: [
+                '0 0 20px rgba(139, 92, 246, 0.3)',
+                '0 0 40px rgba(236, 72, 153, 0.4)',
+                '0 0 20px rgba(6, 182, 212, 0.3)',
+              ],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-full h-full rounded-full p-1 bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500"
+          >
+            <Image
+              src="/avatar.jpg"
+              alt="Shelly Deng"
+              width={218}
+              height={218}
+              className="w-full h-full rounded-full object-cover"
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
 
       <h1 className="text-[clamp(3rem,8vw,5rem)] font-bold leading-none mb-4">
         Shelly Deng
@@ -96,7 +108,7 @@ export function Hero() {
       </div>
 
       <div className="flex gap-5 mt-10 flex-wrap justify-center">
-        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:bg-white/5 transition-all duration-200">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-2xl hover:bg-white/15 transition-all duration-200">
           <span className="text-3xl font-bold bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
             8+
           </span>
@@ -104,7 +116,7 @@ export function Hero() {
             Years Experience
           </div>
         </div>
-        <div className="glass px-8 py-4 rounded-2xl border-slate-200/8 hover:bg-white/5 transition-all duration-200">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 rounded-2xl hover:bg-white/15 transition-all duration-200">
           <span className="text-3xl font-bold bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-500 bg-clip-text text-transparent">
             3
           </span>

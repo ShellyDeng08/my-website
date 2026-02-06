@@ -29,7 +29,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground">
       <AnimatedBackground />
       <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
-      <div className="perspective-container">
+      <div className="perspective-container overflow-y-scroll h-screen scroll-smooth">
         <AnimatePresence mode="wait" initial={false}>
           {activeTab === 'journey' && (
             <motion.div
