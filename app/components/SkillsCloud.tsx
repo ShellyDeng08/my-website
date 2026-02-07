@@ -26,11 +26,11 @@ const skills = [
 ]
 
 const categoryConfig = {
-  frontend: { label: 'Frontend', color: 'from-purple-500 to-pink-500', borderColor: 'border-purple-500/30' },
-  backend: { label: 'Backend', color: 'from-pink-500 to-rose-500', borderColor: 'border-pink-500/30' },
-  database: { label: 'Databases', color: 'from-amber-500 to-orange-500', borderColor: 'border-amber-500/30' },
-  api: { label: 'API', color: 'from-green-500 to-emerald-500', borderColor: 'border-green-500/30' },
-  tools: { label: 'Tools', color: 'from-cyan-500 to-blue-500', borderColor: 'border-cyan-500/30' }
+  frontend: { label: 'Frontend', color: 'from-violet-600 to-pink-600', borderColor: 'border-violet-200', bgLight: 'bg-violet-50', bgHover: 'hover:bg-violet-600' },
+  backend: { label: 'Backend', color: 'from-pink-600 to-rose-600', borderColor: 'border-pink-200', bgLight: 'bg-pink-50', bgHover: 'hover:bg-pink-600' },
+  database: { label: 'Databases', color: 'from-amber-500 to-orange-500', borderColor: 'border-amber-200', bgLight: 'bg-amber-50', bgHover: 'hover:bg-amber-500' },
+  api: { label: 'API', color: 'from-emerald-500 to-teal-500', borderColor: 'border-emerald-200', bgLight: 'bg-emerald-50', bgHover: 'hover:bg-emerald-500' },
+  tools: { label: 'Tools', color: 'from-cyan-600 to-blue-600', borderColor: 'border-cyan-200', bgLight: 'bg-cyan-50', bgHover: 'hover:bg-cyan-600' }
 }
 
 const categories = Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>
@@ -51,7 +51,7 @@ export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (sk
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-8">
+    <div className="w-full max-w-5xl mx-auto py-8 sm:py-10">
       {categories.map((category) => {
         const config = categoryConfig[category]
         const categorySkills = skills.filter(s => s.category === category)
@@ -62,10 +62,10 @@ export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (sk
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: categories.indexOf(category) * 0.1 }}
-            className="mb-6"
+            className="mb-6 sm:mb-8"
           >
-            <h3 className="text-lg font-semibold mb-4 text-slate-300">{config.label}</h3>
-            <div className="flex flex-wrap gap-3">
+            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-slate-600">{config.label}</h3>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {categorySkills.map((skill) => {
                 const isSelected = selectedSkill === skill.name
                 return (
@@ -79,13 +79,13 @@ export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (sk
                     onClick={() => handleClick(skill.name)}
                     onKeyDown={(e) => handleKeyDown(skill.name, e)}
                     className={cn(
-                      'glass px-4 py-2.5 rounded-xl text-sm font-medium transition-all relative',
-                      'border border-white/10',
-                      'focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2',
-                      isSelected ? `${config.borderColor} shadow-lg shadow-${category.replace('frontend', 'purple').replace('backend', 'pink').replace('database', 'amber').replace('api', 'green').replace('tools', 'cyan')}-500/20 bg-gradient-to-r ${categoryConfig[category].color} bg-clip-text text-transparent` : 'border-slate-200/10 text-slate-300 hover:border-white/30 hover:bg-white/5'
+                      'px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all relative',
+                      'border border-slate-200 bg-white shadow-sm hover:shadow-md',
+                      'focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-violet-500',
+                      isSelected ? `${config.borderColor} shadow-lg ${config.bgHover} text-white bg-gradient-to-r ${categoryConfig[category].color}` : `border-slate-200 text-slate-600 hover:border-violet-300 ${config.bgLight}`
                     )}
                   >
-                    <span className="mr-2">{skill.icon}</span>
+                    <span className="mr-1.5 sm:mr-2">{skill.icon}</span>
                     {skill.name}
                   </motion.button>
                 )

@@ -25,14 +25,18 @@ export function WorkTab({ onSkillHighlight }: { onSkillHighlight: (skill: string
   }
 
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-      <h2 className="text-3xl font-bold mb-4">Skills & Projects</h2>
-      <p className="text-slate-400 mb-8">Click a skill to see where I&apos;ve used it</p>
+    <div className="w-full px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 sm:pb-16">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+        Skills & Projects
+      </h2>
+      <p className="text-slate-500 sm:text-base mb-6 sm:mb-8">Click a skill to see where I&apos;ve used it</p>
 
       <SkillsCloud onSkillClick={handleSkillClick} selectedSkill={selectedSkill} />
       <ExperiencePanel skill={selectedSkill} onClose={handleClosePanel} />
 
-      <h3 className="text-2xl font-bold mb-6 mt-12">Featured Projects</h3>
+      <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 mt-12 sm:mt-16" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+        Featured Projects
+      </h3>
       <ProjectsGrid />
     </div>
   )

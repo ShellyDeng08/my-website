@@ -42,3 +42,11 @@ next-env.d.ts
 
 # worktrees
 .worktrees
+
+# planning/documentation files
+findings.md
+progress.md
+task_plan.md
+
+# design preview files
+*-preview.html

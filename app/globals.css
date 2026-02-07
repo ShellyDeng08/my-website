@@ -1,13 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0f1a;
-  --foreground: #ffffff;
-  --accent-purple: #8b5cf6;
-  --accent-pink: #ec4899;
-  --accent-cyan: #06b6d4;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  /* Light Theme Colors */
+  --background: #fafafa;
+  --foreground: #1a1a2e;
+  --accent-purple: #7c3aed;
+  --accent-pink: #db2777;
+  --accent-cyan: #0891b2;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
 }
 
 @theme inline {
@@ -24,13 +27,6 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-}
-
-/* Smooth scroll snap sections */
-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 /* Custom scrollbar */
@@ -39,7 +35,7 @@ section {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -57,8 +53,8 @@ section {
 .glass {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* Perspective for 3D effects */
@@ -72,18 +68,15 @@ section {
   position: relative;
   padding-left: 40px;
   padding-bottom: 40px;
-  border-left: 2px solid rgba(139, 92, 246, 0.3);
-  transition: all 0.3s ease;
+  border-left: 2px solid rgba(124, 58, 237, 0.2);
 }
 
 .timeline-item.dimmed {
   opacity: 0.3;
-  transform: scale(0.98);
 }
 
 .timeline-item.highlighted {
   opacity: 1;
-  transform: scale(1);
 }
 
 .timeline-item::before {
@@ -94,27 +87,24 @@ section {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #8b5cf6;
-  border: 3px solid #0f0f1a;
-  transition: all 0.3s ease;
+  background: var(--accent-purple);
+  border: 3px solid var(--background);
 }
 
 .timeline-item.highlighted::before {
   transform: scale(1.5);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
 }
 
 .timeline-item:hover::before {
   transform: scale(1.5);
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
 }
 
 /* Skills cloud */
 .skills-cloud {
   position: relative;
   height: 400px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 24px;
@@ -125,8 +115,8 @@ section {
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
+  filter: blur(100px);
+  opacity: 0.15;
 }
 
 .orb-1 {
@@ -151,25 +141,6 @@ section {
   background: var(--accent-cyan);
   top: 50%;
   left: 60%;
-}
-
-/* Particle burst */
-.particle {
-  position: fixed;
-  pointer-events: none;
-  border-radius: 50%;
-  animation: particleBurst 0.6s ease-out forwards;
-}
-
-@keyframes particleBurst {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--tx), var(--ty)) scale(0);
-    opacity: 0;
-  }
 }
 
 /* Responsive */

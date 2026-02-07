@@ -77,24 +77,24 @@ export function ExperiencePanel({ skill, onClose }: { skill: string | null, onCl
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
           transition={{ duration: prefersReducedMotion ? 0.15 : 0.3, ease: 'easeOut' }}
-          className="fixed inset-x-0 bottom-0 z-50 bg-black/95 backdrop-blur-xl border-t-2 border-cyan-500 p-6"
+          className="fixed inset-x-0 bottom-0 z-50 bg-slate-900/10 backdrop-blur-xl border-t-2 border-violet-500 p-4 sm:p-6"
         >
-          <Card>
-            <CardHeader className="flex justify-between items-center">
+          <Card className="bg-white/95 shadow-2xl border border-slate-200">
+            <CardHeader className="flex justify-between items-center pb-4 sm:pb-6">
               <CardTitle>{skill} Experience</CardTitle>
               <button
                 onClick={onClose}
-                className="h-8 w-8 rounded-full bg-white/10 hover:bg-white/20 transition-colors focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:outline-none"
+                className="h-8 w-8 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:outline-none flex items-center justify-center text-slate-600 hover:text-slate-800"
                 aria-label="Close panel"
               >
                 ×
               </button>
             </CardHeader>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {data.map((exp, index) => (
-                <div key={index} className="glass rounded-xl p-4">
-                  <h4 className="font-semibold text-lg mb-1 text-white">{exp.company} • {exp.role}</h4>
-                  <p className="text-slate-400">{exp.period}</p>
+                <div key={index} className="bg-slate-50 rounded-xl p-3 sm:p-4 border border-slate-100">
+                  <h4 className="font-semibold text-sm sm:text-base sm:text-lg mb-1 text-slate-800">{exp.company} • {exp.role}</h4>
+                  <p className="text-slate-500 text-xs sm:text-sm">{exp.period}</p>
                 </div>
               ))}
             </div>

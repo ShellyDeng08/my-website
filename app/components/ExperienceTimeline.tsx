@@ -1,8 +1,6 @@
 'use client'
 
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
-import { motion } from 'framer-motion'
-import { useReducedMotion } from '../hooks/useReducedMotion'
 
 const experiences = [
   {
@@ -43,65 +41,62 @@ const experiences = [
 ]
 
 export function ExperienceTimeline({ highlightedSkill }: { highlightedSkill: string | null }) {
-  const prefersReducedMotion = useReducedMotion()
   return (
-    <section className="h-screen flex flex-col justify-center py-16 px-8 bg-[#0f0f1a] overflow-y-auto">
-      <h2 className="text-4xl font-bold text-center mb-12 text-white">Work Experience</h2>
-      <div className="timeline max-w-4xl mx-auto w-full">
+    <section className="min-h-screen flex flex-col pt-24 sm:pt-28 pb-16 sm:pb-20 px-4 sm:px-8 bg-[#fafafa] overflow-y-auto">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 sm:mb-16" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
+        Work Experience
+      </h2>
+      <div className="timeline max-w-4xl mx-auto w-full pb-16">
       {experiences.map((exp, index) => {
         const isHighlighted = highlightedSkill ? exp.skills.includes(highlightedSkill) : true
         const isDimmed = highlightedSkill && !isHighlighted
-
         return (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: isDimmed ? 0.3 : 1, x: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0.1 : 0.3, delay: prefersReducedMotion ? 0 : index * 0.1 }}
-            className={`timeline-item ${isHighlighted ? 'highlighted' : ''} ${isDimmed ? 'dimmed' : ''}`}
-            data-skills={exp.skills.join(',')}
-          >
-            <Card>
-              <CardHeader>
-                <div className="flex-1">
-                  <CardTitle>{exp.role}</CardTitle>
-                  <div className="text-purple-500 font-medium text-base mt-1">{exp.company}</div>
-                </div>
-                <span className="bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  {exp.period}
-                </span>
-              </CardHeader>
-              <ul className="text-slate-400 leading-relaxed list-disc list-inside space-y-2 mt-4">
-                {exp.achievements.map((achievement, i) => (
-                  <li key={i} className="text-slate-400">
-                    <span dangerouslySetInnerHTML={{ __html: achievement }} />
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {exp.skills.map(skill => (
-                  <span
-                    key={skill}
-                    onClick={() => {
-                      // Navigate to work tab and highlight skill
-                      window.dispatchEvent(new CustomEvent('skillClick', { detail: skill }))
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        window.dispatchEvent(new CustomEvent('skillClick', { detail: skill }))
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    className="bg-purple-500/10 border border-purple-500/30 text-purple-500 px-4 py-2 rounded-lg text-sm font-medium cursor-pointer hover:bg-purple-500 hover:text-white transition-all focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:outline-none"
-                  >
-                    {skill}
-                  </span>
-                ))}
+        <div
+          key={index}
+          className={`timeline-item ${isHighlighted ? 'highlighted' : ''} ${isDimmed ? 'dimmed' : ''}`}
+          data-skills={exp.skills.join(',')}
+        >
+          <Card className="bg-white/80 shadow-lg border border-slate-100">
+            <CardHeader>
+              <div className="flex-1">
+                <CardTitle>{exp.role}</CardTitle>
+                <div className="text-violet-600 font-medium text-base mt-1">{exp.company}</div>
               </div>
-            </Card>
-          </motion.div>
+              <span className="bg-gradient-to-r from-violet-600 via-pink-600 to-cyan-600 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold">
+                {exp.period}
+              </span>
+            </CardHeader>
+            <ul className="text-slate-600 leading-relaxed list-disc list-inside space-y-2 mt-4 text-sm sm:text-base">
+              {exp.achievements.map((achievement, i) => (
+                <li key={i} className="text-slate-600">
+                  <span dangerouslySetInnerHTML={{ __html: achievement }} />
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {exp.skills.map(skill => (
+                <span
+                  key={skill}
+                  onClick={() => {
+                    // Navigate to work tab and highlight skill
+                    window.dispatchEvent(new CustomEvent('skillClick', { detail: skill }))
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      window.dispatchEvent(new CustomEvent('skillClick', { detail: skill }))
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  className="bg-violet-50 border border-violet-200 text-violet-600 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium cursor-pointer hover:bg-violet-600 hover:text-white transition-all focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:outline-none"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </Card>
+        </div>
         )
       })}
       </div>

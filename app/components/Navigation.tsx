@@ -13,21 +13,25 @@ export function Navigation({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const tabs = [
-    { id: "journey", label: "My Journey" },
-    { id: "work", label: "My Work" },
+    { id: "hero", label: "Hero" },
+    { id: "about", label: "About" },
+    { id: "experience", label: "Experience" },
+    { id: "skills", label: "Skills" },
+    { id: "projects", label: "Projects" },
+    { id: "testimonials", label: "Testimonials" },
     { id: "connect", label: "Connect" },
   ];
 
   return (
     <>
-      {/* Desktop nav */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-3 px-8 py-4 rounded-20 border border-white/30 bg-white/15 shadow-lg shadow-purple-500/20">
+      {/* Desktop nav - light theme */}
+      <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-2 px-6 py-3 rounded-2xl border border-slate-200 bg-white/90 shadow-xl shadow-slate-200/50 backdrop-blur-xl">
         {tabs.map((tab) => (
           <Button
             key={tab.id}
             variant={activeTab === tab.id ? "default" : "ghost"}
             size="lg"
-            className="text-white/90 hover:text-white font-semibold text-base px-6"
+            className="text-slate-700 hover:text-violet-600 font-semibold text-sm sm:text-base px-4 sm:px-6 transition-colors"
             onClick={() => onTabChange(tab.id)}
           >
             {tab.label}
@@ -35,14 +39,14 @@ export function Navigation({
         ))}
       </nav>
 
-      {/* Mobile menu button */}
+      {/* Mobile menu button - light theme */}
       <button
-        className="md:hidden fixed top-5 right-4 z-50 p-2 glass rounded-12 border border-slate-200/8 hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:outline-none transition-all"
+        className="md:hidden fixed top-4 right-4 z-50 p-2.5 glass rounded-xl border border-slate-200 bg-white/90 shadow-lg hover:scale-105 focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:outline-none transition-all"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle menu"
       >
         <svg
-          className="w-6 h-6 text-white"
+          className="w-6 h-6 text-slate-700"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -56,19 +60,19 @@ export function Navigation({
         </svg>
       </button>
 
-      {/* Mobile menu */}
+      {/* Mobile menu - light theme */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-40 bg-slate-900/30 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <div className="fixed top-20 left-1/2 -translate-x-1/2 glass rounded-16 border border-white/20 bg-white/10 p-2 flex flex-col gap-2 w-max">
+          <div className="fixed top-16 sm:top-20 left-1/2 -translate-x-1/2 glass rounded-2xl border border-slate-200 bg-white/95 shadow-2xl p-2 flex flex-col gap-1 w-max min-w-[200px] animate-in zoom-in-95 duration-200">
             {tabs.map((tab) => (
               <Button
                 key={tab.id}
                 variant={activeTab === tab.id ? "default" : "ghost"}
                 size="sm"
-                className="text-white/90 hover:text-white font-medium"
+                className="text-slate-700 hover:text-violet-600 hover:bg-violet-50 font-medium justify-start"
                 onClick={() => {
                   onTabChange(tab.id);
                   setIsMobileMenuOpen(false);
