@@ -1,107 +1,117 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ExternalLink, Github } from 'lucide-react'
+import { ScrollReveal } from './ScrollReveal'
 
 const projects = [
   {
+    num: '01', accent: 1,
     name: 'SSR Architecture Optimization',
-    description: 'Maintained and optimized custom server-side rendering (SSR) architecture, reducing app crash rates by 20% through memory usage improvements.',
+    description: 'Maintained and optimized custom server-side rendering architecture, tackling memory issues and crash rates at scale.',
+    impact: '\u2193 20% uninstall rate',
     tech: ['Node.js', 'React', 'SSR'],
-    color: 'from-violet-600 to-pink-600'
   },
   {
+    num: '02', accent: 2,
     name: 'Permission Management System',
-    description: 'Designed and developed API, backend processing, and database schema adopted by 10+ business units to enhance security and efficiency.',
+    description: 'End-to-end system design \u2014 API, backend processing, and database schema \u2014 adopted by 10+ business units.',
+    impact: '10+ teams adopted',
     tech: ['Python', 'Golang', 'MySQL'],
-    color: 'from-cyan-600 to-blue-600'
   },
   {
+    num: '03', accent: 3,
     name: 'Quality Monitoring Dashboard',
-    description: 'Led system design for quality monitoring, reducing TikTok Live Wallet online incidents by 30% and improving platform reliability.',
+    description: 'System design for quality monitoring across TikTok Live Wallet, improving platform reliability and response time.',
+    impact: '\u2193 30% incidents',
     tech: ['Python', 'Golang', 'MySQL'],
-    color: 'from-pink-600 to-violet-600'
   },
   {
-    name: 'Hotel Site Migration',
-    description: 'Led migration of hotel site&apos;s tech stack from C# to Node.js + React, achieving 30% boost in page speed and improving developer experience.',
+    num: '04', accent: 1,
+    name: 'Hotel Platform Migration',
+    description: 'Led a full tech stack migration from C# to Node.js + React, redesigning the architecture with SSR and BFF layers.',
+    impact: '\u2191 50% faster pages',
     tech: ['Node.js', 'React', 'TypeScript'],
-    color: 'from-amber-500 to-orange-500'
   },
-  {
-    name: 'New Tech Repository',
-    description: 'Contributed to architecture design of new tech repository including SSR, BFF layer, and component library, achieving 50% performance improvement on hotel details page.',
-    tech: ['React', 'Next.js', 'TypeScript'],
-    color: 'from-emerald-500 to-teal-500'
-  },
-  {
-    name: 'Real-time Analytics',
-    description: 'Built real-time analytics pipeline for monitoring application performance and user behavior, enabling data-driven decision making.',
-    tech: ['Python', 'Redis', 'WebSocket'],
-    color: 'from-rose-500 to-pink-600'
-  }
 ]
 
 export function ProjectsGrid() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-      {projects.map((project, index) => (
-        <motion.div
-          key={project.name}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.15, duration: 0.5 }}
-          className="group"
-        >
-          <div className="glass bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 hover:border-violet-300 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-violet-500/10 relative overflow-hidden">
-            {/* Gradient background effect */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-            <div className={`absolute top-0 right-0 w-24 sm:w-32 h-24 sm:h-32 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-10 blur-3xl rounded-full transition-opacity duration-500`} />
-
-            <div className="relative">
-              {/* Project name with gradient */}
-              <h3 className={`text-lg sm:text-xl font-bold mb-3 bg-gradient-to-r ${project.color} bg-clip-text text-transparent`}>
-                {project.name}
-              </h3>
-
-              {/* Description */}
-              <p className="text-slate-500 sm:text-slate-400 text-sm leading-relaxed mb-4 sm:mb-5">
-                {project.description}
-              </p>
-
-              {/* Tech stack */}
-              <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
-                {project.tech.map(tech => (
-                  <span
-                    key={tech}
-                    className={`bg-gradient-to-r ${project.color} bg-clip-text text-transparent border border-current/20 px-2.5 sm:px-3 py-1 rounded-lg text-xs font-medium`}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              {/* Action links */}
-              <div className="flex gap-3">
-                <button
-                  className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-500 hover:text-violet-600 transition-colors"
-                  aria-label="View project details"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  View
-                </button>
-                <button
-                  className="flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-500 hover:text-violet-600 transition-colors"
-                  aria-label="View source code"
-                >
-                  <Github className="w-4 h-4" />
-                  Code
-                </button>
-              </div>
-            </div>
+    <section id="projects" className="py-24 md:py-28 px-6 md:px-12">
+      <div className="max-w-[1120px] mx-auto">
+        <ScrollReveal>
+          <div className="text-xs font-semibold uppercase tracking-[0.1em] mb-3" style={{ color: 'var(--accent-3)' }}>
+            Projects
           </div>
-        </motion.div>
-      ))}
-    </div>
+        </ScrollReveal>
+        <ScrollReveal delay={1}>
+          <h2
+            className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.2] tracking-tight mb-4"
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-heading)' }}
+          >
+            Things I&apos;ve built.
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal delay={2}>
+          <p className="text-base max-w-[520px] leading-relaxed mb-12" style={{ color: 'var(--text-body)' }}>
+            Highlights from my work across performance, architecture, and systems design.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {projects.map((project, i) => (
+            <ScrollReveal key={project.name} delay={i % 2}>
+              <div
+                className="p-8 rounded-2xl border relative overflow-hidden transition-all duration-300 hover:-translate-y-0.5 group"
+                style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              >
+                {/* Top accent bar on hover */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `var(--accent-${project.accent})` }}
+                />
+
+                <div
+                  className="text-[0.6875rem] font-semibold mb-4"
+                  style={{ color: `var(--accent-${project.accent})` }}
+                >
+                  {project.num}
+                </div>
+                <h3
+                  className="text-lg font-semibold mb-2.5"
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-heading)' }}
+                >
+                  {project.name}
+                </h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-body)' }}>
+                  {project.description}
+                </p>
+                <div
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold mb-4"
+                  style={{
+                    background: `var(--accent-${project.accent}-light)`,
+                    color: `var(--accent-${project.accent})`,
+                  }}
+                >
+                  {project.impact}
+                </div>
+                <div className="flex gap-1.5 flex-wrap">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 rounded-md text-[0.6875rem] font-medium"
+                      style={{
+                        background: `var(--accent-${project.accent}-light)`,
+                        color: `var(--accent-${project.accent})`,
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }

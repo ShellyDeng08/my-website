@@ -1,99 +1,69 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import { ScrollReveal } from './ScrollReveal'
 
-const skills = [
-  // Frontend
-  { name: 'React', category: 'frontend', icon: '⚛️' },
-  { name: 'React Native', category: 'frontend', icon: '📱' },
-  { name: 'JavaScript', category: 'frontend', icon: '⚡' },
-  { name: 'HTML/CSS', category: 'frontend', icon: '🎨' },
-  // Backend
-  { name: 'Node.js', category: 'backend', icon: '💚' },
-  { name: 'Python', category: 'backend', icon: '🐍' },
-  { name: 'Golang', category: 'backend', icon: '🐹' },
-  // Databases
-  { name: 'MySQL', category: 'database', icon: '🗄️' },
-  { name: 'MongoDB', category: 'database', icon: '🍃' },
-  // API
-  { name: 'GraphQL', category: 'api', icon: '◈' },
-  { name: 'RESTful API', category: 'api', icon: '🌐' },
-  // Tools
-  { name: 'Jest', category: 'tools', icon: '🧪' },
-  { name: 'Webpack', category: 'tools', icon: '📦' },
-  { name: 'Github CI', category: 'tools', icon: '🔄' }
+const categories = [
+  { label: 'Frontend', accent: 1, skills: ['React', 'React Native', 'JavaScript / TypeScript', 'HTML / CSS'] },
+  { label: 'Backend', accent: 2, skills: ['Node.js', 'Python', 'Golang'] },
+  { label: 'Data & API', accent: 3, skills: ['MySQL', 'MongoDB', 'GraphQL', 'RESTful API'] },
+  { label: 'Tools', accent: 1, skills: ['Jest', 'Webpack', 'GitHub CI/CD', 'Redis'] },
 ]
 
-const categoryConfig = {
-  frontend: { label: 'Frontend', color: 'from-violet-600 to-pink-600', borderColor: 'border-violet-200', bgLight: 'bg-violet-50', bgHover: 'hover:bg-violet-600' },
-  backend: { label: 'Backend', color: 'from-pink-600 to-rose-600', borderColor: 'border-pink-200', bgLight: 'bg-pink-50', bgHover: 'hover:bg-pink-600' },
-  database: { label: 'Databases', color: 'from-amber-500 to-orange-500', borderColor: 'border-amber-200', bgLight: 'bg-amber-50', bgHover: 'hover:bg-amber-500' },
-  api: { label: 'API', color: 'from-emerald-500 to-teal-500', borderColor: 'border-emerald-200', bgLight: 'bg-emerald-50', bgHover: 'hover:bg-emerald-500' },
-  tools: { label: 'Tools', color: 'from-cyan-600 to-blue-600', borderColor: 'border-cyan-200', bgLight: 'bg-cyan-50', bgHover: 'hover:bg-cyan-600' }
-}
-
-const categories = Object.keys(categoryConfig) as Array<keyof typeof categoryConfig>
-
-export function SkillsCloud({ onSkillClick, selectedSkill }: { onSkillClick: (skill: string) => void; selectedSkill: string | null }) {
-  const handleClick = (skill: string) => {
-    console.log('SkillsCloud handleClick:', skill)
-    onSkillClick(skill)
-  }
-
-  const handleKeyDown = (skill: string, e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      console.log('SkillsCloud handleKeyDown:', skill)
-      e.preventDefault()
-      e.stopPropagation()
-      onSkillClick(skill)
-    }
-  }
-
+export function SkillsCloud() {
   return (
-    <div className="w-full max-w-5xl mx-auto py-8 sm:py-10">
-      {categories.map((category) => {
-        const config = categoryConfig[category]
-        const categorySkills = skills.filter(s => s.category === category)
-
-        return (
-          <motion.div
-            key={category}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: categories.indexOf(category) * 0.1 }}
-            className="mb-6 sm:mb-8"
+    <section id="skills" className="py-24 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg-alt)' }}>
+      <div className="max-w-[1120px] mx-auto">
+        <ScrollReveal>
+          <div className="text-xs font-semibold uppercase tracking-[0.1em] mb-3" style={{ color: 'var(--accent-2)' }}>
+            Skills
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={1}>
+          <h2
+            className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.2] tracking-tight mb-4"
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-heading)' }}
           >
-            <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-slate-600">{config.label}</h3>
-            <div className="flex flex-wrap gap-2 sm:gap-3">
-              {categorySkills.map((skill) => {
-                const isSelected = selectedSkill === skill.name
-                return (
-                  <motion.button
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    whileHover={{ scale: 1.08, y: -3 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    onClick={() => handleClick(skill.name)}
-                    onKeyDown={(e) => handleKeyDown(skill.name, e)}
-                    className={cn(
-                      'px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all relative',
-                      'border border-slate-200 bg-white shadow-sm hover:shadow-md',
-                      'focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-violet-500',
-                      isSelected ? `${config.borderColor} shadow-lg ${config.bgHover} text-white bg-gradient-to-r ${categoryConfig[category].color}` : `border-slate-200 text-slate-600 hover:border-violet-300 ${config.bgLight}`
-                    )}
-                  >
-                    <span className="mr-1.5 sm:mr-2">{skill.icon}</span>
-                    {skill.name}
-                  </motion.button>
-                )
-              })}
-            </div>
-          </motion.div>
-        )
-      })}
-    </div>
+            Technologies I work with.
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal delay={2}>
+          <p className="text-base max-w-[520px] leading-relaxed mb-12" style={{ color: 'var(--text-body)' }}>
+            Core competencies across the stack, from UI to infrastructure.
+          </p>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {categories.map((cat, i) => (
+            <ScrollReveal key={cat.label} delay={i}>
+              <div
+                className="p-7 rounded-2xl border transition-all duration-300 hover:-translate-y-0.5"
+                style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              >
+                <div
+                  className="text-[0.75rem] font-semibold uppercase tracking-wider mb-4 pb-3.5"
+                  style={{
+                    color: `var(--accent-${cat.accent})`,
+                    borderBottom: '1px solid var(--border)',
+                  }}
+                >
+                  {cat.label}
+                </div>
+                <div className="flex flex-col gap-3">
+                  {cat.skills.map((skill) => (
+                    <div key={skill} className="flex items-center gap-2.5 text-sm font-medium" style={{ color: 'var(--text-heading)' }}>
+                      <span
+                        className="w-[7px] h-[7px] rounded-full flex-shrink-0"
+                        style={{ background: `var(--accent-${cat.accent})` }}
+                      />
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }

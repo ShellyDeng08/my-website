@@ -1,68 +1,99 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Quote } from 'lucide-react'
+import { ScrollReveal } from './ScrollReveal'
 
 const testimonials = [
   {
     name: 'Alex Chen',
+    initials: 'AC',
     role: 'Engineering Manager',
     company: 'TikTok',
-    quote: 'Shelly is one of the most driven engineers I&apos;ve had the pleasure of working with. Her ability to tackle complex technical challenges while maintaining a clear focus on user experience is exceptional.'
+    accent: 1,
+    quote: 'Shelly is one of the most driven engineers I\'ve had the pleasure of working with. Her ability to tackle complex technical challenges while maintaining a clear focus on user experience is exceptional.',
   },
   {
     name: 'Sarah Martinez',
+    initials: 'SM',
     role: 'Tech Lead',
     company: 'Blitz',
-    quote: 'Working with Shelly has been a great experience. She brings not just technical expertise but also excellent communication skills and a collaborative mindset that elevates the entire team.'
+    accent: 2,
+    quote: 'Working with Shelly has been a great experience. She brings not just technical expertise but also excellent communication skills and a collaborative mindset that elevates the entire team.',
   },
   {
     name: 'David Park',
+    initials: 'DP',
     role: 'Senior Developer',
-    company: 'Trip.com Group',
-    quote: 'Shelly played a key role in our successful tech stack migration. Her understanding of both frontend and backend technologies made her invaluable to our team&apos;s growth.'
-  }
+    company: 'Trip.com',
+    accent: 3,
+    quote: 'Shelly played a key role in our successful tech stack migration. Her understanding of both frontend and backend technologies made her invaluable to our team\'s growth.',
+  },
 ]
 
 export function Testimonials() {
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center w-full px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16 sm:pb-20 bg-[#fafafa]">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-10 sm:mb-16" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-        What People Say
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {testimonials.map((testimonial, index) => (
-          <motion.div
-            key={testimonial.name}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="glass bg-white/80 shadow-lg border border-slate-200 rounded-2xl p-6 sm:p-8 hover-lift"
+    <section id="testimonials" className="py-24 md:py-28 px-6 md:px-12" style={{ background: 'var(--bg-alt)' }}>
+      <div className="max-w-[1120px] mx-auto">
+        <ScrollReveal>
+          <div className="text-xs font-semibold uppercase tracking-[0.1em] mb-3" style={{ color: 'var(--accent-1)' }}>
+            Testimonials
+          </div>
+        </ScrollReveal>
+        <ScrollReveal delay={1}>
+          <h2
+            className="text-[clamp(1.75rem,3.5vw,2.5rem)] font-bold leading-[1.2] tracking-tight mb-4"
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-heading)' }}
           >
-            <div className="flex items-start gap-4 mb-4">
-              <div className="flex-shrink-0 w-10 sm:w-12 h-10 sm:h-12 bg-gradient-to-br from-violet-500 to-pink-500 rounded-full flex items-center justify-center text-white">
-                <Quote className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <div>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed italic">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-              </div>
-            </div>
+            What people say.
+          </h2>
+        </ScrollReveal>
+        <ScrollReveal delay={2}>
+          <p className="text-base max-w-[520px] leading-relaxed mb-12" style={{ color: 'var(--text-body)' }}>
+            From colleagues and managers I&apos;ve worked with.
+          </p>
+        </ScrollReveal>
 
-            <div className="mt-6 pt-6 border-t border-slate-100">
-              <div className="text-sm sm:text-base">
-                <div className="font-bold text-slate-800">
-                  {testimonial.name}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {testimonials.map((t, i) => (
+            <ScrollReveal key={t.name} delay={i}>
+              <div
+                className="p-8 rounded-2xl border transition-all duration-300"
+                style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+              >
+                <div className="mb-6">
+                  <span
+                    className="text-[2.5rem] leading-none font-serif opacity-40"
+                    style={{ color: `var(--accent-${t.accent})` }}
+                  >
+                    &ldquo;
+                  </span>
+                  <p className="text-[0.9375rem] leading-[1.8] italic mt-2" style={{ color: 'var(--text-body)' }}>
+                    {t.quote}
+                  </p>
                 </div>
-                <div className="text-slate-500">
-                  {testimonial.role} @ {testimonial.company}
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-semibold"
+                    style={{
+                      background: `var(--accent-${t.accent}-light)`,
+                      color: `var(--accent-${t.accent})`,
+                      fontFamily: 'var(--font-space-grotesk)',
+                    }}
+                  >
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold" style={{ color: 'var(--text-heading)' }}>
+                      {t.name}
+                    </div>
+                    <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+                      {t.role} &middot; {t.company}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </ScrollReveal>
+          ))}
+        </div>
       </div>
     </section>
   )

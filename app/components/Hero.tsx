@@ -1,110 +1,101 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
-
-const keywords = [
-  'Full-Stack Engineer', '8+ Years Exp', 'Shanghai',
-  'Coffee Lover', 'Building for Scale', 'TikTok Alumni'
-]
+import { ScrollReveal } from './ScrollReveal'
+import { Mail, Github } from 'lucide-react'
 
 export function Hero() {
-  const [taglineIndex, setTaglineIndex] = useState(0)
-
-  const taglines = [
-    'Software Engineer with 8+ years experience',
-    'Full-Stack Engineer @ Blitz',
-    'Previously @ TikTok & Trip.com Group',
-    'Building scalable systems'
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTaglineIndex((prev) => (prev + 1) % taglines.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center text-center relative overflow-hidden bg-[#fafafa] py-12 px-4">
-      <div className="relative flex justify-center items-center mb-6 sm:mb-8">
-        <div className="relative rounded-full pointer-events-none" style={{ width: 'clamp(280px, 50vw, 500px)', height: 'clamp(280px, 50vw, 500px)' }}>
+    <section id="hero" className="min-h-screen flex items-center px-6 md:px-12 pt-24 pb-20 max-w-[1120px] mx-auto">
+      <div className="max-w-[720px]">
+        <ScrollReveal>
           <div
-            className="absolute text-xs sm:text-sm font-medium text-violet-600/70 whitespace-nowrap"
-            style={{ left: '50%', top: '6%', transform: 'translate(-50%, -50%)' }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold mb-7"
+            style={{ background: 'var(--accent-3-light)', color: 'var(--accent-3)' }}
           >
-            Full-Stack Engineer
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500" style={{ animation: 'pulse-dot 2s infinite' }} />
+            Open to Opportunities
           </div>
-          <div
-            className="absolute text-xs sm:text-sm font-medium text-violet-600/70 whitespace-nowrap"
-            style={{ left: '88%', top: '28%', transform: 'translate(-50%, -50%)' }}
-          >
-            8+ Years Exp
-          </div>
-          <div
-            className="absolute text-xs sm:text-sm font-medium text-violet-600/70 whitespace-nowrap"
-            style={{ left: '6%', top: '72%', transform: 'translate(-50%, -50%)' }}
-          >
-            Shanghai
-          </div>
-          <div
-            className="absolute text-xs sm:text-sm font-medium text-violet-600/70 whitespace-nowrap"
-            style={{ left: '12%', top: '50%', transform: 'translate(-50%, -50%)' }}
-          >
-            Coffee Lover
-          </div>
-          <div
-            className="absolute text-xs sm:text-sm font-medium text-violet-600/70 whitespace-nowrap"
-            style={{ left: '50%', top: '28%', transform: 'translate(-50%, -50%)' }}
-          >
-            Building for Scale
-          </div>
-          <div
-            className="absolute text-xs sm:text-sm font-medium text-violet-600/70 whitespace-nowrap"
-            style={{ left: '94%', top: '72%', transform: 'translate(-50%, -50%)' }}
-          >
-            TikTok Alumni
-          </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="relative z-10 rounded-full overflow-hidden" style={{ width: 'clamp(160px, 25vw, 220px)', height: 'clamp(160px, 25vw, 220px)' }}>
-          <div className="w-full h-full rounded-full p-1 bg-gradient-to-br from-violet-600 via-pink-600 to-cyan-600">
-            <Image
-              src="/avatar.jpg"
-              alt="Shelly Deng"
-              width={218}
-              height={218}
-              className="w-full h-full rounded-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
+        <ScrollReveal delay={1}>
+          <h1
+            className="text-[clamp(2.75rem,5.5vw,4rem)] font-bold leading-[1.1] tracking-tight mb-5"
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-heading)' }}
+          >
+            Software engineer<br />
+            who builds for{' '}
+            <span style={{ color: 'var(--accent-1)' }}>scale</span> &<br />
+            <span style={{ color: 'var(--accent-2)' }}>impact.</span>
+          </h1>
+        </ScrollReveal>
 
-      <h1 className="text-[clamp(3.5rem,10vw,6rem)] font-bold leading-none mb-4 tracking-tight" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-        Shelly Deng
-      </h1>
+        <ScrollReveal delay={2}>
+          <p className="text-[1.0625rem] leading-[1.8] max-w-[520px] mb-9" style={{ color: 'var(--text-body)' }}>
+            Full-stack engineer with 8+ years of experience building high-performance
+            applications at TikTok, Trip.com, and Blitz — serving millions of users worldwide.
+          </p>
+        </ScrollReveal>
 
-      <div className="h-10 flex items-center justify-center text-violet-600 text-[clamp(1rem,2.5vw,1.3rem)]">
-        {taglines[taglineIndex]}<span className="animate-pulse">|</span>
-      </div>
+        <ScrollReveal delay={3}>
+          <div className="flex gap-3 items-center mb-14">
+            <a
+              href="mailto:xldeng0808@gmail.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[0.9375rem] font-medium transition-all duration-200 hover:-translate-y-0.5"
+              style={{
+                background: 'var(--btn-primary-bg)',
+                color: 'var(--btn-primary-text)',
+              }}
+            >
+              <Mail className="w-4 h-4" />
+              Get in touch
+            </a>
+            <a
+              href="https://github.com/ShellyDeng08"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[0.9375rem] font-medium border transition-all duration-200 hover:-translate-y-0.5"
+              style={{
+                borderColor: 'var(--border)',
+                color: 'var(--text-body)',
+              }}
+            >
+              <Github className="w-4 h-4" />
+              GitHub
+            </a>
+          </div>
+        </ScrollReveal>
 
-      <div className="flex gap-4 sm:gap-5 mt-8 sm:mt-10 flex-wrap justify-center px-4">
-        <div className="glass px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white/80">
-          <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-br from-violet-600 via-pink-600 to-cyan-600 bg-clip-text text-transparent">
-            8+
-          </span>
-          <div className="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">
-            Years Experience
+        <ScrollReveal delay={4}>
+          <div
+            className="flex gap-8 sm:gap-12 pt-9 flex-wrap"
+            style={{ borderTop: '1px solid var(--border)' }}
+          >
+            {[
+              { num: '8+', label: 'Years Exp', accent: 1 },
+              { num: '3', label: 'Companies', accent: 2 },
+              { num: '50%', label: 'Perf Gains', accent: 3 },
+              { num: '10+', label: 'Teams Impacted', accent: 1 },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div
+                  className="text-[1.75rem] font-bold tracking-tight"
+                  style={{
+                    fontFamily: 'var(--font-space-grotesk)',
+                    color: `var(--accent-${stat.accent})`,
+                  }}
+                >
+                  {stat.num}
+                </div>
+                <div
+                  className="text-xs uppercase tracking-wider font-medium mt-1"
+                  style={{ color: 'var(--text-muted)' }}
+                >
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-        <div className="glass px-6 sm:px-8 py-3 sm:py-4 rounded-2xl bg-white/80">
-          <span className="text-2xl sm:text-3xl font-bold bg-gradient-to-br from-violet-600 via-pink-600 to-cyan-600 bg-clip-text text-transparent">
-            3
-          </span>
-          <div className="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider mt-1">
-            Major Companies
-          </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

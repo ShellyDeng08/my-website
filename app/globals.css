@@ -1,177 +1,224 @@
 @import "tailwindcss";
 
-:root {
-  /* Light Theme Colors */
-  --background: #fafafa;
-  --foreground: #1a1a2e;
-  --accent-purple: #7c3aed;
-  --accent-pink: #db2777;
-  --accent-cyan: #0891b2;
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(0, 0, 0, 0.06);
-  --text-secondary: #64748b;
+/* ========================================
+   THEME 1: Warm Off-White
+   Accents: Amber + Terracotta + Sage
+   ======================================== */
+[data-theme="warm"] {
+  --bg-main: #faf8f5;
+  --bg-alt: #f5f0ea;
+  --bg-card: #ffffff;
+  --border: #e8e0d4;
+  --border-hover: #d4c9b8;
+  --text-heading: #1c1917;
+  --text-body: #57534e;
+  --text-muted: #a8a29e;
+
+  --accent-1: #b45309;
+  --accent-2: #c2410c;
+  --accent-3: #4d7c5e;
+
+  --accent-1-light: #fef3c7;
+  --accent-2-light: #fee2d5;
+  --accent-3-light: #dcfce7;
+
+  --tag-bg: #f5f0e8;
+  --tag-text: #78716c;
+  --nav-bg: rgba(250, 248, 245, 0.9);
+  --nav-border: #e8e0d4;
+
+  --btn-primary-bg: #1c1917;
+  --btn-primary-hover: #292524;
+  --btn-primary-text: #ffffff;
+}
+
+/* ========================================
+   THEME 2: Cool Blue-Tinted
+   Accents: Blue + Teal + Slate-Purple
+   ======================================== */
+[data-theme="cool"] {
+  --bg-main: #f0f4f8;
+  --bg-alt: #e4ecf4;
+  --bg-card: #ffffff;
+  --border: #cdd8e4;
+  --border-hover: #b4c4d6;
+  --text-heading: #0f172a;
+  --text-body: #475569;
   --text-muted: #94a3b8;
+
+  --accent-1: #2563eb;
+  --accent-2: #0891b2;
+  --accent-3: #7c3aed;
+
+  --accent-1-light: #dbeafe;
+  --accent-2-light: #cffafe;
+  --accent-3-light: #ede9fe;
+
+  --tag-bg: #e8eff8;
+  --tag-text: #64748b;
+  --nav-bg: rgba(240, 244, 248, 0.9);
+  --nav-border: #cdd8e4;
+
+  --btn-primary-bg: #2563eb;
+  --btn-primary-hover: #1d4ed8;
+  --btn-primary-text: #ffffff;
 }
 
+/* ========================================
+   THEME 3: Soft Lavender
+   Accents: Purple + Rose + Indigo
+   ======================================== */
+[data-theme="lavender"] {
+  --bg-main: #f5f3ff;
+  --bg-alt: #ece8fe;
+  --bg-card: #ffffff;
+  --border: #ddd6fe;
+  --border-hover: #c4b5fd;
+  --text-heading: #1e1b4b;
+  --text-body: #4c4576;
+  --text-muted: #8b83b0;
+
+  --accent-1: #7c3aed;
+  --accent-2: #db2777;
+  --accent-3: #4f46e5;
+
+  --accent-1-light: #ede9fe;
+  --accent-2-light: #fce7f3;
+  --accent-3-light: #e0e7ff;
+
+  --tag-bg: #f0ecff;
+  --tag-text: #6d63a0;
+  --nav-bg: rgba(245, 243, 255, 0.9);
+  --nav-border: #ddd6fe;
+
+  --btn-primary-bg: #7c3aed;
+  --btn-primary-hover: #6d28d9;
+  --btn-primary-text: #ffffff;
+}
+
+/* ========================================
+   THEME 4: Dark Mode
+   Accents: Indigo + Emerald + Amber
+   ======================================== */
+[data-theme="dark"] {
+  --bg-main: #0f0f1a;
+  --bg-alt: #161625;
+  --bg-card: #1c1c2e;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --text-heading: #f1f0f5;
+  --text-body: #a1a0b0;
+  --text-muted: #6b6a7a;
+
+  --accent-1: #818cf8;
+  --accent-2: #34d399;
+  --accent-3: #fbbf24;
+
+  --accent-1-light: rgba(129, 140, 248, 0.12);
+  --accent-2-light: rgba(52, 211, 153, 0.12);
+  --accent-3-light: rgba(251, 191, 36, 0.12);
+
+  --tag-bg: rgba(255, 255, 255, 0.06);
+  --tag-text: #8b8a9a;
+  --nav-bg: rgba(15, 15, 26, 0.92);
+  --nav-border: rgba(255, 255, 255, 0.06);
+
+  --btn-primary-bg: #818cf8;
+  --btn-primary-hover: #a5b4fc;
+  --btn-primary-text: #0f0f1a;
+}
+
+/* ========================================
+   Tailwind theme integration
+   ======================================== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg-main: var(--bg-main);
+  --color-bg-alt: var(--bg-alt);
+  --color-bg-card: var(--bg-card);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-1-light: var(--accent-1-light);
+  --color-accent-2-light: var(--accent-2-light);
+  --color-accent-3-light: var(--accent-3-light);
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-text: var(--tag-text);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), var(--font-space-grotesk), sans-serif;
-  overflow-x: hidden;
-}
-
+/* ========================================
+   BASE STYLES
+   ======================================== */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+body {
+  background: var(--bg-main);
+  color: var(--text-body);
+  font-family: var(--font-inter), var(--font-space-grotesk), sans-serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--accent-1);
+  color: white;
+}
+
+/* ========================================
+   SCROLL REVEAL ANIMATIONS
+   ======================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-purple);
-  border-radius: 4px;
+  background: var(--accent-1);
+  border-radius: 3px;
 }
 
 /* Focus styles */
 *:focus-visible {
-  outline: 2px solid var(--accent-cyan);
+  outline: 2px solid var(--accent-1);
   outline-offset: 2px;
 }
 
-/* Glassmorphism utilities */
-.glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Perspective for 3D effects */
-.perspective-container {
-  perspective: 2000px;
-  transform-style: preserve-3d;
-}
-
-/* Timeline styles */
-.timeline-item {
-  position: relative;
-  padding-left: 40px;
-  padding-bottom: 40px;
-  border-left: 2px solid rgba(124, 58, 237, 0.2);
-}
-
-.timeline-item.dimmed {
-  opacity: 0.3;
-}
-
-.timeline-item.highlighted {
-  opacity: 1;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -8px;
-  top: 0;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent-purple);
-  border: 3px solid var(--background);
-}
-
-.timeline-item.highlighted::before {
-  transform: scale(1.5);
-}
-
-.timeline-item:hover::before {
-  transform: scale(1.5);
-}
-
-/* Skills cloud */
-.skills-cloud {
-  position: relative;
-  height: 400px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-/* Animated background orbs */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.15;
-}
-
-.orb-1 {
-  width: 400px;
-  height: 400px;
-  background: var(--accent-purple);
-  top: -100px;
-  left: -100px;
-}
-
-.orb-2 {
-  width: 500px;
-  height: 500px;
-  background: var(--accent-pink);
-  bottom: -200px;
-  right: -150px;
-}
-
-.orb-3 {
-  width: 350px;
-  height: 350px;
-  background: var(--accent-cyan);
-  top: 50%;
-  left: 60%;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .timeline-header {
-    flex-direction: column;
-  }
-
-  .skills-cloud {
-    height: 300px;
-  }
-
-  /* Stack magnetic buttons on mobile */
-  .flex.gap-4.mt-8.justify-center {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Scale down orbs on mobile */
-  .orb-1 {
-    width: 250px;
-    height: 250px;
-  }
-
-  .orb-2 {
-    width: 300px;
-    height: 300px;
-  }
-
-  .orb-3 {
-    width: 200px;
-    height: 200px;
-  }
+/* ========================================
+   PULSE DOT ANIMATION
+   ======================================== */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }

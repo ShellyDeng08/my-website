@@ -50,3 +50,14 @@ task_plan.md
 
 # design preview files
 *-preview.html
+*-comparison.html
+design-preview.html
+
+# Claude Code
+.claude/
+
+# ttadk config
+.ttadk/
+
+# personal notes
+AI_Usage_Guide_DanKoe.md

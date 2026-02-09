@@ -1,85 +1,107 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
 
-export function Navigation({
-  activeTab,
-  onTabChange,
-}: {
-  activeTab: string;
-  onTabChange: (tab: string) => void;
-}) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+export function Navigation() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  const tabs = [
-    { id: "hero", label: "Hero" },
-    { id: "about", label: "About" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "testimonials", label: "Testimonials" },
-    { id: "connect", label: "Connect" },
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const links = [
+    { href: "#about", label: "About" },
+    { href: "#experience", label: "Experience" },
+    { href: "#skills", label: "Skills" },
+    { href: "#projects", label: "Projects" },
+    { href: "#testimonials", label: "Testimonials" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
     <>
-      {/* Desktop nav - light theme */}
-      <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-2 px-6 py-3 rounded-2xl border border-slate-200 bg-white/90 shadow-xl shadow-slate-200/50 backdrop-blur-xl">
-        {tabs.map((tab) => (
-          <Button
-            key={tab.id}
-            variant={activeTab === tab.id ? "default" : "ghost"}
-            size="lg"
-            className="text-slate-700 hover:text-violet-600 font-semibold text-sm sm:text-base px-4 sm:px-6 transition-colors"
-            onClick={() => onTabChange(tab.id)}
-          >
-            {tab.label}
-          </Button>
-        ))}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 h-16 flex items-center justify-between backdrop-blur-xl transition-all duration-300 ${
+          scrolled ? "shadow-sm" : ""
+        }`}
+        style={{
+          background: "var(--nav-bg)",
+          borderBottom: scrolled ? "1px solid var(--nav-border)" : "1px solid transparent",
+        }}
+      >
+        <a
+          href="#"
+          className="text-base font-bold"
+          style={{
+            fontFamily: "var(--font-space-grotesk)",
+            color: "var(--text-heading)",
+          }}
+        >
+          Shelly Deng
+        </a>
+
+        {/* Desktop links */}
+        <ul className="hidden md:flex gap-7 list-none">
+          {links.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="text-sm font-medium transition-colors duration-200 hover:opacity-100"
+                style={{ color: "var(--text-muted)" }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-heading)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden p-2 rounded-lg transition-colors"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+          style={{ color: "var(--text-heading)" }}
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            {mobileOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </nav>
 
-      {/* Mobile menu button - light theme */}
-      <button
-        className="md:hidden fixed top-4 right-4 z-50 p-2.5 glass rounded-xl border border-slate-200 bg-white/90 shadow-lg hover:scale-105 focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:outline-none transition-all"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label="Toggle menu"
-      >
-        <svg
-          className="w-6 h-6 text-slate-700"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
-
-      {/* Mobile menu - light theme */}
-      {isMobileMenuOpen && (
+      {/* Mobile menu */}
+      {mobileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/30 backdrop-blur-sm animate-in fade-in duration-200"
-          onClick={() => setIsMobileMenuOpen(false)}
+          className="fixed inset-0 z-40"
+          onClick={() => setMobileOpen(false)}
+          style={{ background: "rgba(0,0,0,0.2)", backdropFilter: "blur(4px)" }}
         >
-          <div className="fixed top-16 sm:top-20 left-1/2 -translate-x-1/2 glass rounded-2xl border border-slate-200 bg-white/95 shadow-2xl p-2 flex flex-col gap-1 w-max min-w-[200px] animate-in zoom-in-95 duration-200">
-            {tabs.map((tab) => (
-              <Button
-                key={tab.id}
-                variant={activeTab === tab.id ? "default" : "ghost"}
-                size="sm"
-                className="text-slate-700 hover:text-violet-600 hover:bg-violet-50 font-medium justify-start"
-                onClick={() => {
-                  onTabChange(tab.id);
-                  setIsMobileMenuOpen(false);
-                }}
+          <div
+            className="fixed top-16 left-4 right-4 rounded-2xl border p-2 flex flex-col gap-1 shadow-xl"
+            style={{
+              background: "var(--bg-card)",
+              borderColor: "var(--border)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="block px-4 py-3 rounded-xl text-sm font-medium transition-colors"
+                style={{ color: "var(--text-body)" }}
+                onClick={() => setMobileOpen(false)}
               >
-                {tab.label}
-              </Button>
+                {link.label}
+              </a>
             ))}
           </div>
         </div>
