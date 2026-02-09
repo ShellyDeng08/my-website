@@ -35,6 +35,50 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  name: 'Shelly Deng',
+                  url: 'https://my-website-alpha-swart.vercel.app',
+                  description:
+                    'Personal portfolio of Shelly Deng, a Fullstack Engineer with 8+ years of experience.',
+                },
+                {
+                  '@type': 'Person',
+                  name: 'Shelly Deng',
+                  url: 'https://my-website-alpha-swart.vercel.app',
+                  jobTitle: 'Fullstack Engineer',
+                  worksFor: {
+                    '@type': 'Organization',
+                    name: 'Blitz',
+                  },
+                  sameAs: [
+                    'https://github.com/ShellyDeng08',
+                    'https://linkedin.com/in/xuelian-deng-21332b260/',
+                  ],
+                  knowsAbout: [
+                    'React',
+                    'Vue.js',
+                    'Next.js',
+                    'TypeScript',
+                    'Node.js',
+                    'Python',
+                    'Golang',
+                    'Server-Side Rendering',
+                    'Full-Stack Development',
+                    'Web Performance Optimization',
+                  ],
+                  email: 'mailto:xldeng0808@gmail.com',
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
